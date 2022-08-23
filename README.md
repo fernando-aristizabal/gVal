@@ -30,5 +30,7 @@ gVal is a high-level Python package to evaluate geospatial datasets by computing
     - maps: rasterio object, numpy array, GDAL rasters/vectors, xarray?
 - Dependency management/Packaging
     - Docker, PyPi, pip, etc
-
+- User interface
+    - public functions as API
+    - command line utilities
 
