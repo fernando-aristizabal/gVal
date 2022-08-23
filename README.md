@@ -24,6 +24,9 @@ gVal is a Python package to evaluate geospatial datasets by computing agreement 
 - PEP formats
 - Documentation website
 - Test functionality
+- output formats
+    - metrics: json, xml, dictionary, dataframe, etc?
+    - maps: rasterio object, numpy array, GDAL rasters/vectors, xarray?
 
 
 
