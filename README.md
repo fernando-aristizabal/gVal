@@ -1,7 +1,8 @@
 # gVal: Geospatial Evaluations
-gVal is a Python package to evaluate geospatial datasets by computing agreement maps and metrics between a proposed dataset and a benchmark dataset.
+gVal is a high-level Python package to evaluate geospatial datasets by computing agreement maps and metrics between a proposed dataset and a benchmark dataset.
 
 # Requirements
+- Easy to use, well documented, high-level functionality.
 - Accepts rasters and vector files.
 - Accepts continous and categorical variables.
 - Supports a wide array of continous and categorical metrics.
