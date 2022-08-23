@@ -23,6 +23,7 @@ gVal is a Python package to evaluate geospatial datasets by computing agreement 
 - Docstring style
 - PEP formats
 - Documentation website
+- Test functionality
 
 
 
