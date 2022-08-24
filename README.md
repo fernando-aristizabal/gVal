@@ -7,7 +7,7 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Accepts categorical variables with set encodings.
 - Supports a wide array of continous and categorical metrics.
 - Reads files in chunks to avoid lower memory requirements.
-- Conducts operations in parallel using Dask.
+- Conducts operations in parallel.
 - Uses a consistent set of vocabulary in variables, comments, and documentation
     - metrics, agreement, difference, evaluation, benchmark map, Candidate map? Need better name?
 - Clear, concise, foundational Object Oriented Architecture
@@ -41,15 +41,17 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
     - command line tools
 - Have a clear, code versioning and tagging system.
 
-# Checkpoint 2: Scaling to Catalogs of Candidates and Benchmarks
-- Candidate map and benchmark maps should have a series of metadata values (discrete, categorical, continous) associated with them (source model, assumptions, parameter values, sensors, etc).
-    - Agreement maps and metrics should be able to inherit these metadata 
+# Checkpoint 2: Scaling to Catalogs of Maps
+- Candidate and benchmark maps need to be cataloged with associated metadata values
+    - space, time, parameters, etc
+- When comparing catalogs, need to address the alignment problem
+    - Have functions to test for candidate and benchmark map alignment across the following dimensions:
+        - space (extents and resolutions)
+        - time (extents and resolutions)
+        - modeling parameters (ie flow rates)
+        - target variable (ie extents, depths, speeds, LULC, etc)
+- Agreement maps and metrics should be able to inherit these metadata 
 - Consider meta-data problem: STAC, raster metadata, database, table?
-- Have functions to test for candidate and benchmark map alignment across the following dimensions:
-    - space (extents and resolutions)
-    - time (extents and resolutions)
-    - modeling parameters (ie flow rates)
-    - target variable (ie extents, depths, speeds, LULC, etc)
 - Computing statistical significance, confidence intervals, etc of a sampling of metrics.
 
 # Checkpoint 3: Extending Functionality
