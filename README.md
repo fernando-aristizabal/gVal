@@ -43,4 +43,5 @@ gVal is a high-level Python package to evaluate geospatial datasets by computing
     - command line utilities
 - How to deal with flow magnitudes?
     - avoiding comparison between maps of different flow magnitudes
+- Computing statistical significance, confidence intervals, etc of a sampling of metrics.
 
