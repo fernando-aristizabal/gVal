@@ -46,14 +46,14 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 ## Checkpoint 2: Scaling to Catalogs of Maps
 - Candidate and benchmark maps need to be cataloged with associated metadata values
     - space, time, parameters, etc
+- Agreement maps and metrics should be able to inherit these metadata 
+    - Consider meta-data problem: STAC, raster tags, database, table?
 - When comparing catalogs, need to address the alignment problem
     - Have functions to test for candidate and benchmark map alignment across the following dimensions:
         - space (extents and resolutions)
         - time (extents and resolutions)
         - modeling parameters (ie flow rates)
         - target variable (ie extents, depths, speeds, LULC, etc)
-- Agreement maps and metrics should be able to inherit these metadata 
-- Consider meta-data problem: STAC, raster metadata, database, table?
 - Computing statistical significance, confidence intervals, etc of a sampling of metrics.
 
 ## Checkpoint 3: Extending Functionality
