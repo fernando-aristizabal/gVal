@@ -38,7 +38,7 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
     - Docker, PyPi, pip, etc
 - Have a clear user interface
     - public functions as API
-    - command line utilities
+    - command line tools
 - Have a clear, code versioning and tagging system.
 
 # Checkpoint 2: Scaling to Catalogs of Candidates and Benchmarks
