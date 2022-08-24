@@ -20,7 +20,11 @@ gVal is a high-level Python package to evaluate geospatial datasets by computing
     - benchmark map
     - Candidate map? Need better name?
 - write up architecture
-    - what classes to have?
+    - Classes
+        - metrics dictionary
+            - method to include/remove metrics from dictionary
+        - candidate map?
+        - benchmark map?
 - Decide on metrics
     - How to handle multiple names for the same metric (TPR/POD)
         - Use name dictionary?
