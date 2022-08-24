@@ -11,9 +11,9 @@ gVal is a high-level Python package to evaluate geospatial datasets by computing
 - Candidate map and benchmark maps should have a series of metadata values (discrete, categorical, continous) associated with them (source model, assumptions, parameter values, sensors, etc).
     - Agreement maps and metrics should be able to inherit these metadata 
 
-# To-Do:
-- Decide on language
-    - metrics vs statistics
+# To-Do
+- Decide on vocabulary
+    - metrics 
     - agreement
     - evaluation
     - benchmark map
