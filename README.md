@@ -57,4 +57,4 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 # Checkpoint 3: Extending Functionality
 - Accepts vectors files for candidate or benchmark maps.
 - Allows for metrics to be sorted by geometries with associated parameter combinations for analysis purposes.
-- Multi-band raster support.
+- Multi-band raster support?
