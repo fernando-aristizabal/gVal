@@ -59,7 +59,10 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Computing statistical significance, confidence intervals, etc of a sampling of metrics.
 
 ## Checkpoint 3: Extending Functionality
-- Accepts vectors files (points, lines, and polygons) for candidate or benchmark maps.
 - Allows for metrics to be sorted by geometries with associated parameter combinations for analysis purposes.
+- Accepts vectors files (points, lines, and polygons) for candidate or benchmark maps.
 - Multi-band raster support?
 - Multi-class categorical extension
+- Analyze contingency tables with statistics:
+    - [StatsModels](https://www.statsmodels.org/stable/contingency_tables.html)
+    - [SciPy](https://docs.scipy.org/doc/scipy-0.18.0/reference/stats.html#contingency-table-functions)
