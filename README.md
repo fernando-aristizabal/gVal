@@ -6,7 +6,7 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 ## Checkpoint 1: Minimum Viable Product
 - Easy to use, well documented, high-level functionality.
 - Accepts GDAL compatible single-band raster formats.
-- Accepts categorical variables with set encodings.
+- Accepts two-class (binary) categorical variables with set encodings.
 - Accepts local and remote files on S3s.
 - Supports a wide array of continous and categorical metrics.
 - Reads files in chunks to avoid lower memory requirements.
@@ -32,6 +32,7 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Use consistent Docstring styling
 - Use PEP formats and standards
 - Make a documentation website
+    - installation, objects, usage examples
 - Include test functionality
     - unit tests
     - integration tests
@@ -61,3 +62,4 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Accepts vectors files for candidate or benchmark maps.
 - Allows for metrics to be sorted by geometries with associated parameter combinations for analysis purposes.
 - Multi-band raster support?
+- Multi-class categorical extension
