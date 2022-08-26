@@ -46,6 +46,9 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Have a clear, code versioning and tagging system.
 
 ## Checkpoint 2: Scaling to Catalogs of Maps
+- Evaluations should be scaled to accept a series of candidates and benchmarks.
+    - These maps should be accepted as lists of objects, file paths, or catalogs.
+    - Catalogs should be a data structure designed for this purpose to include experiment relevant parameters associated with each map.
 - Candidate and benchmark maps need to be cataloged with associated metadata values
     - space, time, parameters, etc
 - Agreement maps and metrics should be able to inherit these metadata 
