@@ -8,7 +8,7 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Accepts GDAL compatible single-band raster formats.
 - Accepts two-class (binary) categorical variables with set encodings.
 - Accepts local and remote files on S3s.
-- Supports a wide array of continous and categorical metrics.
+- Supports a wide array of two-class categorical metrics.
 - Reads files in chunks to avoid lower memory requirements.
 - Conducts operations in parallel.
 - Uses a consistent set of vocabulary in variables, comments, and documentation
