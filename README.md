@@ -7,13 +7,14 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Easy to use, well documented, high-level functionality.
 - Accepts GDAL compatible single-band raster formats.
 - Accepts two-class (binary) categorical variables with set encodings.
+- Handles a registry of encodings based on keyword descriptors (e.g. inundation map, landcover data, etc).
 - Accepts local and remote files on S3s.
 - Supports a wide array of two-class categorical metrics.
 - Reads files in chunks to avoid lower memory requirements.
 - Conducts operations in parallel.
 - Uses a consistent set of vocabulary in variables, comments, and documentation
     - metrics, agreement, difference, evaluation, benchmark map, Candidate map? Need better name?
-- Clear, concise, foundational Object Oriented Architecture
+- Clear, concise, and foundational Object Oriented Architecture
     - Classes
         - Metrics
             - How to handle multiple names for the same metric (TPR/POD)
@@ -45,7 +46,11 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
     - command line tools
 - Have a clear, code versioning and tagging system.
 
-## Checkpoint 2: Scaling to Catalogs of Maps
+## Checkpoint 2: Extending Functionality
+- Extending to include continuous data inputs and metrics.
+- Support continuous to categorical conversion?
+
+## Checkpoint 3: Scaling to Catalogs of Maps
 - Evaluations should be scaled to accept a series of candidates and benchmarks.
     - These maps should be accepted as lists of objects, file paths, or catalogs.
     - Catalogs should be a data structure designed for this purpose to include experiment relevant parameters associated with each map.
@@ -61,7 +66,7 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
         - target variable (ie extents, depths, speeds, LULC, etc)
 - Computing statistical significance, confidence intervals, etc of a sampling of metrics.
 
-## Checkpoint 3: Extending Functionality
+## Checkpoint 4: Extending Functionality
 - Allows for metrics to be sorted by geometries with associated parameter combinations for analysis purposes.
 - Accepts vectors files (points, lines, and polygons) for candidate or benchmark maps.
 - Multi-band raster support?
