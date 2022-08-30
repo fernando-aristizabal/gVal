@@ -3,7 +3,7 @@ import rasterio
 import numpy as np
 from gval.utils.loading_datasets import load_single_rasterio_file
 
-def Agreement_on_aligned_rasters(candidate_map, benchmark_map, variable_type='categorical', encoding):
+def Agreement_on_aligned_rasters(candidate_map, benchmark_map, comparison_type='two-class'):
     """
     Computes agreement raster between categorical candidate and benchmark maps.
     
@@ -21,8 +21,8 @@ def Agreement_on_aligned_rasters(candidate_map, benchmark_map, variable_type='ca
     benchmark_map : str
        Benchmark map
     
-    variable_type : str 
-       Variable type. Accepts continuous or categorical.
+    comparison_type : str 
+       Variable type. Accepts two-class, multi-class, continuous.
 
     Returns
     -------

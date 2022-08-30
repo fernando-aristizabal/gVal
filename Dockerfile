@@ -6,4 +6,4 @@ USER user
 WORKDIR /home/user
 
 COPY requirments.txt .
-RUN pip3 install -r requirements.txt && rm requirements.txt
+RUN pipenv install -r requirements.txt && rm requirements.txt

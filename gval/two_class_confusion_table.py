@@ -3,9 +3,11 @@ import xarray as xr
 
 class confusion_matrix():
 
-    def __init__(self, tp, fp, fn, tn=None):
+    def __init__(self, TP, FP, FN, TN=None, legend=None):
 
-        self.tp = tp
-        self.fp = fp
-        self.fn = fn
-        self.tn = tn
+        self.values = { 'TP' : TP, 'FP' : FP, 'FN' : FN, 'TN' : TN }
+        self.legend = legend
+
+    def print_table(self):
+        
+
