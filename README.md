@@ -49,6 +49,9 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 ## Checkpoint 2: Extending Functionality
 - Extending to include continuous data inputs and metrics.
 - Support continuous to categorical conversion?
+- Create a survey of metrics.
+    - Organize in hiearchy.
+    - Include in tables with descriptions, math formulas, and references.
 
 ## Checkpoint 3: Scaling to Catalogs of Maps
 - Evaluations should be scaled to accept a series of candidates and benchmarks.
@@ -67,8 +70,9 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Computing statistical significance, confidence intervals, etc of a sampling of metrics.
 
 ## Checkpoint 4: Extending Functionality
-- Allows for metrics to be sorted by geometries with associated parameter combinations for analysis purposes.
 - Accepts vectors files (points, lines, and polygons) for candidate or benchmark maps.
+    - Handling raster/raster, vector/raster, raster/vector, or vector/vector comparison?
+- Allows for metrics to be sorted by geometries with associated parameter combinations for analysis purposes.
 - Multi-band raster support?
 - Multi-class categorical extension
 - Analyze contingency tables with statistics:
