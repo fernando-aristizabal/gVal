@@ -1,5 +1,5 @@
 # gVal: Geospatial Evaluator
-gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial datasets by computing agreement maps and metrics among candidate and benchmark maps.
+gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial datasets by comparing candidate and benchmark maps to produce agreement maps and metrics.
 
 # Road Map
 
