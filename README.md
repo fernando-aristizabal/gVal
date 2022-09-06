@@ -50,7 +50,7 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Extending to include continuous data inputs and metrics.
 - Support discretization of continuous maps to categorical conversion
 - Create a survey of metrics.
-    - Organize in hiearchy.
+    - Organize in hierarchy.
     - Include in tables with descriptions, math formulas, and references.
 
 ## Checkpoint 3: Scaling to Catalogs of Maps
