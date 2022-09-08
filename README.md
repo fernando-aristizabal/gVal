@@ -4,47 +4,47 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 # Road Map
 
 ## Checkpoint 1: Minimum Viable Product
-- Easy to use, well documented, high-level functionality.
-- Accepts GDAL compatible single-band raster formats.
-- Accepts two-class (binary) categorical variables with set encodings.
-- Handles a registry of encodings based on keyword descriptors (e.g. inundation map, landcover data, etc).
-- Accepts local and remote files on S3s.
-- Supports a wide array of two-class categorical metrics.
-- Reads files in chunks to avoid lower memory requirements.
-- Conducts operations in parallel.
-- Uses a consistent set of vocabulary in variables, comments, and documentation
-    - metrics, agreement, difference, evaluation, benchmark map, Candidate map? Need better name?
-- Clear, concise, and foundational Object Oriented Architecture
-    - Classes
-        - Metrics
-            - How to handle multiple names for the same metric (TPR/POD)
-                - metrics dictionary
-                    - method to include/remove metrics from dictionary
-        - candidate map?
-        - benchmark map?
-        - evaluation map/metrics
-            - make python object stantards for evaluation map and metrics
-                - maps: xarray object, rasterio object, arrays, etc
-                - metrics: dictionary, pandas dataframe, dask dataframe, etc?
-            - include methods to serialize and deserialize
-                - map formats: gdal compatible rasters
-                - metric formats: json, plain-text tabular with separator (tsv, csv, etc), pandas dataframe pickle, hdf, etc
-     - Organize functions, classes, modules, parameters, etc in a logical directory structure
-- Use consistent Docstring styling
-- Use PEP formats and standards
-- Make a documentation website
-    - installation, objects, usage examples
-- Include test functionality
-    - unit tests
-    - integration tests
-    - include simple test datasets
-    - include results for tests on readme/website
-- Dependency management & packaging
-    - Docker, PyPi, pip, etc
-- Have a clear user interface
-    - public functions as API
-    - command line tools
-- Have a clear, code versioning and tagging system.
+- [ ] Easy to use, well documented, high-level functionality.
+- [ ] Accepts GDAL compatible single-band raster formats.
+- [ ] Accepts two-class (binary) categorical variables with set encodings.
+- [ ] Handles a registry of encodings based on keyword descriptors (e.g. inundation map, landcover data, etc).
+- [ ] Accepts local and remote files on S3s.
+- [ ] Supports a wide array of two-class categorical metrics.
+- [ ] Reads files in chunks to avoid lower memory requirements.
+- [ ] Conducts operations in parallel.
+- [ ] Uses a consistent set of vocabulary in variables, comments, and documentation
+    - [ ] metrics, agreement, difference, evaluation, benchmark map, Candidate map? Need better name?
+- [ ] Clear, concise, and foundational Object Oriented Architecture
+    - [ ] Classes
+        - [ ] Metrics
+            - [ ] How to handle multiple names for the same metric (TPR/POD)
+                - [ ] metrics dictionary
+                    - [ ] method to include/remove metrics from dictionary
+        - [ ] candidate map?
+        - [ ] benchmark map?
+        - [ ] evaluation map/metrics
+            - [ ] make python object stantards for evaluation map and metrics
+                - [ ] maps: xarray object, rasterio object, arrays, etc
+                - [ ] metrics: dictionary, pandas dataframe, dask dataframe, etc?
+            - [ ] include methods to serialize and deserialize
+                - [ ] map formats: gdal compatible rasters
+                - [ ] metric formats: json, plain-text tabular with separator (tsv, csv, etc), pandas dataframe pickle, hdf, etc
+     - [ ] Organize functions, classes, modules, parameters, etc in a logical directory structure
+- [ ] Use consistent Docstring styling
+- [ ] Use PEP formats and standards
+- [ ] Make a documentation website
+    - [ ] installation, objects, usage examples
+- [ ] Include test functionality
+    - [ ] unit tests
+    - [ ] integration tests
+    - [ ] include simple test datasets
+    - [ ] include results for tests on readme/website
+- [ ] Dependency management & packaging
+    - [ ] Docker, PyPi, pip, etc
+- [ ] Have a clear user interface
+    - [ ] public functions as API
+    - [ ] command line tools
+- [ ] Have a clear, code versioning and tagging system.
 
 ## Checkpoint 2: Extending Functionality
 - Extending to include continuous data inputs and metrics.
@@ -78,5 +78,16 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - Analyze contingency tables with statistics:
     - [StatsModels](https://www.statsmodels.org/stable/contingency_tables.html)
     - [SciPy](https://docs.scipy.org/doc/scipy-0.18.0/reference/stats.html#contingency-table-functions)
+
+# Contributing
+
+If you would like to contribute, please follow the following steps:
+
+    1. Fork the project.
+    2. Clone your fork: `git clone <your_username>/gVal`
+    2. Create a feature branch: `git checkout -b <your_feature>`)
+    3. Commit your changes: `git commit -m 'feature message'`
+    4. Push to the branch: `git push origin <your_username> <your_feature>`
+    5. Open a pull request.
 
 # References
