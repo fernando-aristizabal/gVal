@@ -1,6 +1,7 @@
 import rasterio
 import rioxarray
 import xarray as xr
+import boto3
 
 
 def load_single_rasterio_file(source):
@@ -17,7 +18,7 @@ def load_single_rasterio_file(source):
     
     # rasterio dataset
     if isinstance(source,rasterio.io.DatasetReader):
-        output = source
+        output = source.copy()
     
     # local file path or S3 url
     if isinstance(source,str):
@@ -31,13 +32,13 @@ def load_single_rasterio_file(source):
     return(output)
 
 
-def load_single_raster_with_xarray(filename, *args, **kwargs):
+def load_single_raster_with_xarray(source, *args, **kwargs):
     """
     Utility function loads a single raster as xarray from file path or URL checking if not already a raster.
     
     Parameters
     ----------
-    filename : str, rasterio.io.DatasetReader, or Rasterio.vrt.WarpedVRT
+    source : str, os.PathLike, rasterio.io.DatasetReader, or Rasterio.vrt.WarpedVRT
         Path to file or opened Rasterio Dataset.
     *args : args, optional
         Optional positional arguments to pass to rioxarray.open_rasterio.
@@ -57,15 +58,15 @@ def load_single_raster_with_xarray(filename, *args, **kwargs):
     
     # rasterio dataset
     if isinstance(source,xr.dataset):
-        output = source
-    if isinstance(source,xr.DataArray):
-        output = source
-    if isinstance(filename,list):
+        output = source.copy()
+    elif isinstance(source,xr.DataArray):
+        output = source.copy()
+    elif isinstance(filename,list):
         if all( [isinstance(e,xr.Dataset) for e in filename] )
-        output = source
+        output = source.copy()
     
     # local file path or S3 url
-    if isinstance(filename,str):
+    if isinstance(filename,os.PathLike):
         # TO-DO: support authentication
         output = rioxarray.open_rasterio(source)
     

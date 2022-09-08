@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+xarray = "*"
+rasterio = "*"
+numpy = "*"
+pandas = "*"
+geopandas = "*"
+shapely = "*"
+fiona = "*"
+tqdm = "*"
+dask = "*"
+
+[dev-packages]
+pytest = "*"
