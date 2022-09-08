@@ -1,9 +1,9 @@
 # gVal: Geospatial Evaluator
 gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial datasets by comparing candidate and benchmark maps to produce agreement maps and metrics.
 
-# Road Map
+## Road Map
 
-## Checkpoint 1: Minimum Viable Product
+### Checkpoint 1: Minimum Viable Product
 - [ ] Easy to use, well documented, high-level functionality.
 - [ ] Accepts GDAL compatible single-band raster formats.
 - [ ] Accepts two-class (binary) categorical variables with set encodings.
@@ -46,14 +46,14 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
     - [ ] command line tools
 - [ ] Have a clear, code versioning and tagging system.
 
-## Checkpoint 2: Extending Functionality
+### Checkpoint 2: Extending Functionality
 - Extending to include continuous data inputs and metrics.
 - Support discretization of continuous maps to categorical conversion
 - Create a survey of metrics.
     - Organize in hierarchy.
     - Include in tables with descriptions, math formulas, and references.
 
-## Checkpoint 3: Scaling to Catalogs of Maps
+### Checkpoint 3: Scaling to Catalogs of Maps
 - Evaluations should be scaled to accept a series of candidates and benchmarks.
     - These maps should be accepted as lists of objects, file paths, or catalogs.
     - Catalogs should be a data structure designed for this purpose to include experiment relevant parameters associated with each map.
@@ -69,7 +69,7 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
         - target variable (ie extents, depths, speeds, LULC, etc)
 - Computing statistical significance, confidence intervals, etc of a sampling of metrics.
 
-## Checkpoint 4: Extending Functionality
+### Checkpoint 4: Extending Functionality
 - Accepts vectors files (points, lines, and polygons) for candidate or benchmark maps.
     - Handling raster/raster, vector/raster, raster/vector, or vector/vector comparison?
 - Allows for metrics to be sorted by geometries with associated parameter combinations for analysis purposes.
@@ -79,10 +79,10 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
     - [StatsModels](https://www.statsmodels.org/stable/contingency_tables.html)
     - [SciPy](https://docs.scipy.org/doc/scipy-0.18.0/reference/stats.html#contingency-table-functions)
 
-# Contributing
+## Contributing
 
 Please see the [Contributing](CONTRIBUTING.rst) file for instructions on how to contribute to this work.
 
-# References
+## References
 
 Please see the [References](REFERENCES.bib) file for citations to all the references used in this work.
