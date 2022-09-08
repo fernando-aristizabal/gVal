@@ -104,6 +104,7 @@ gVal (pronounced "g-val") is a high-level Python engine to evaluate geospatial d
     - [ ] include results for tests on readme/website
 - [ ] Dependency management & packaging
     - [ ] Docker, PyPi, pip, etc
+- [ ] Use a logger
 - [ ] Have a clear user interface
     - [ ] public functions as API
     - [ ] command line tools

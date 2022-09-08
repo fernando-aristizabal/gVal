@@ -3,6 +3,7 @@ import rasterio
 import numpy as np
 from gval.utils.loading_datasets import load_single_raster_with_xarray
 from operator import eq, ne, gt, lt, le, ge
+from gval.utils.misc_utils import isiterable
 
 def Discretize_map( source_map, 
                     # support discretizing functions: equal, greater,less, greaterequal, lessequal,isclose
@@ -44,6 +45,4 @@ def Discretize_map( source_map,
     """
     
     # check for iterables
-    if hasattr(candidate_positive_conditions,'__iter__'):
-
-        #[operator(i for i in candidate_positive_conditions]
+    if isiterable(candidate_positive_conditions)
