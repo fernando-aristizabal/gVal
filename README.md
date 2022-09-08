@@ -1,6 +1,83 @@
 # gVal: Geospatial Evaluator
 gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial datasets by comparing candidate and benchmark maps to produce agreement maps and metrics.
 
+## Architecture
+- Inputs maps
+    - Candidates and Benchmarks
+        - Including collections and catalogs
+    - Variable name
+        - ie inundation, land cover, land use, backscatter, etc
+    - Statistical Data Type
+        - Categorical (multi-class)
+        - Binary (two- class)
+            - encodings for positive and negative condition values
+        - Continous
+    - Raster attribute table: associates names to data values
+    - Data format
+        - GDAL compatible vector 
+        - GDAL compatible raster
+    - Additional metadata
+        - modeling parameters
+        - time
+    - Decide on storage types and in-memory data structures
+        - Deserialization methods
+        - Especialy for metadata (STAC, geoparquet, geojson, etc)
+- Comparison Prep
+    - The following prep operations should be done during the comparison to avoid excessive I/O operations.
+        - Exceptions include:
+            - Checking for spatial extents
+            - Data format check and conversion
+    - Check for alignment between candidate and benchmark.
+        - spatial
+            - CRS
+            - extents (reject if no alignment is found)
+            - resolution
+        - temporal
+        - metadata
+    - Homogenize
+        - spatial
+            - Reproject
+            - Match extents
+            - Resample resolutions
+        - temporal
+            - select temporal mis-alignment criteria
+        - metadata
+            - select rules for disagreement
+    - Statistical Data Type Conversions
+        - Pass operator functions both registered and user defined
+        - Conversion Types
+            - Categorical to binary
+            - Continuous to categorical
+            - Continuous to binary
+    - Data Format Check and Conversion
+        - Check for vector and raster data formats
+        - Convert to one consistent data format for comparison
+    - Metadata prep
+- Comparison
+    - Comparisons should avoid opening up the entire files to avoid excessive memory use.
+    - Comparisons should minimize I/O operations.
+    - Comparison type
+        - Binary
+        - Categorical
+            - one vs one
+            - one vs all
+        - Continuous
+    - Metrics to use:
+        - registered list per comparison type
+            - handle multiple names for same metric
+        - user provided
+        - user ignored
+    - Data format of comparison
+        - vector or raster
+- Outputs
+    - Decide on storage types and methods to serialize
+    - agreement maps
+        - raster, vector, both
+    - metric values
+        - contingency tables
+        - metric values
+        - dataframes
+
 ## Road Map
 
 ### Checkpoint 1: Minimum Viable Product
@@ -15,20 +92,6 @@ gVal (pronounced "g-val") is a high-level Python package to evaluate geospatial 
 - [ ] Uses a consistent set of vocabulary in variables, comments, and documentation
     - [ ] metrics, agreement, difference, evaluation, benchmark map, Candidate map? Need better name?
 - [ ] Clear, concise, and foundational Object Oriented Architecture
-    - [ ] Classes
-        - [ ] Metrics
-            - [ ] How to handle multiple names for the same metric (TPR/POD)
-                - [ ] metrics dictionary
-                    - [ ] method to include/remove metrics from dictionary
-        - [ ] candidate map?
-        - [ ] benchmark map?
-        - [ ] evaluation map/metrics
-            - [ ] make python object stantards for evaluation map and metrics
-                - [ ] maps: xarray object, rasterio object, arrays, etc
-                - [ ] metrics: dictionary, pandas dataframe, dask dataframe, etc?
-            - [ ] include methods to serialize and deserialize
-                - [ ] map formats: gdal compatible rasters
-                - [ ] metric formats: json, plain-text tabular with separator (tsv, csv, etc), pandas dataframe pickle, hdf, etc
      - [ ] Organize functions, classes, modules, parameters, etc in a logical directory structure
 - [ ] Use consistent Docstring styling
 - [ ] Use PEP formats and standards
