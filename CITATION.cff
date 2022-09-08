@@ -4,7 +4,7 @@ authors:
 - family-names: "Aristizabal"
   given-names: "Fernando"
   orcid: "https://orcid.org/0000-0000-0000-0000"
-title: "gVal: Geospatial Evaluator"
+title: "gVal: Geospatial Evaluation Engine"
 version: 0.0.0.1
 doi: 
 date-released: 
