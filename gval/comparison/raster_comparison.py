@@ -1,68 +1,49 @@
 import xarray
-import rasterio
 import numpy as np
-from gval.utils.loading_datasets import load_raster_with_xarray
 from tqdm.dask import TqdmCallback
+import gval.two_class_confusion_table import two_class_contingency_table  
 
-def Raster_comparison( candidate_map, benchmark_map,
-                       comparison_type='two-class',
-                       metrics='two-class',
-                       verbose=False,
-                       compute=False
-                     ):
-    """
-    Computes agreement raster between categorical candidate and benchmark maps.
+
+def two_class_comparison( candidate_map, benchmark_map,
+                          candidate_positive_value, benchmark_positive_value,
+                          candidate_negative_value, benchmark_negative_value,
+                          confusion_matrix_encoding
+                        ):
+
+    # create agreement map
+    agreement_map = candidate_map.copy()
+
+    # how to handle NDVs
+
+    # determine boolean indexes of two class confusion matrix metrics
+    candidate_is_positive = candidate_map == candidate_positive_value
+    benchmark_is_positive = benchmark_map == benchmark_positive_value
+
+    # computes negatives otherwise just flips positives
+    if with_negatives:
+        candidate_is_negative = candidate_map == candidate_negative_value
+        benchmark_is_negative = benchmark_map == benchmark_negative_value
+    else:
+        candidate_is_negative = ~candidate_is_positive
+        benchmark_is_negative = ~benchmark_is_positive
+
+    tp = np.logical_and(candidate_is_positive, benchmark_is_positive)
+    fp = np.logical_and(candidate_is_positive, benchmark_is_negative)
+    tn = np.logical_and(candidate_map == candidate_negative_value, benchmark_map == benchmark_negative_value)
+    fn = np.logical_and(candidate_map == candidate_negative_value, benchmark_map == benchmark_positive_value)
     
-    - Reads input rasters in chucks (blocks/windows).
-    - Applies function to chunk and returns appropriate values (primary metrics, diff, etc).
-    - Aggregate function to combine window scale outputs.
-    - Returns agreement map and metrics.
-
-    Parameters
-    ----------
-    candidate_map : str, os.PathLike, rasterio.io.DatasetReader, rasterio.io.WarpedVRT, xarray.Dataset, xarray.DataArray
-       Candidate map
-    benchmark_map : str, os.PathLike, rasterio.io.DatasetReader, rasterio.io.WarpedVRT, xarray.Dataset, xarray.DataArray
-       Benchmark map
-    comparison_type : str 
-       Variable type. Accepts two-class, multi-class, continuous. When two-class is elected, multiple positive conditions are grouped together as a single positive condition for evaluation.
-    
-    Returns
-    -------
-
-    Raises
-    ------
-
-    Notes
-    -----
-    
-    References
-    ----------
-
-    Examples
-    --------
-    """
-
-    # temporary variables declaring args and kwargs to pass to rioxarray.open_rasterio
-    loading_args = []
-    loading_kwargs = {'chunks':[1,1,'auto'],'lock'}
-    
-    # load maps to xarray
-    candidate_map_xr = load_raster_with_xarray(candidate_map, *loading_args, **loading_kwargs)
-    benchmark_map_xr = load_raster_with_xarray(benchmark_map, *loading_args, **loading_kwargs)
-
-    # pre-comparison prep 
-
-    # comparison
-    # this will currently load everything.
-    # how to avoid loading if only writing to disk?
-    comparison = two_class_comparison_with_negatives(candidate_map_xr,benchmark_map_xr)
-    
-    if compute:
-        with TqdmCallback(desc=,quiet=(not verbose):
-            comparison.compute()
+    # create agreement map
+    agreement_map[tp] = confusion_matrix_encoding['TP']
+    agreement_map[fp] = confusion_matrix_encoding['FP']
+    agreement_map[tn] = confusion_matrix_encoding['TN']
+    agreement_map[fp] = confusion_matrix_encoding['FP']
 
 
+    return Agreement_map(agreement_map), two_class_contingency_table(tp.sum(),fp.sum(),tn.sum(),fn.sum())
 
 
-return(agreement_map)
+def multi_class_comparison():
+    pass
+
+def continuous_comparison():
+    pass
