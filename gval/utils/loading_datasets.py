@@ -1,10 +1,10 @@
 import rasterio
-import rioxarray
+import rioxarray as rxr
 import xarray as xr
 import boto3
 
 
-def load_single_rasterio_file(source):
+def load_rasterio_file(source, *args, **kwargs):
     """
     Utility function loads a single raster from file path or URL checking if not already a raster.
     
@@ -23,14 +23,14 @@ def load_single_rasterio_file(source):
     # local file path or S3 url
     if isinstance(source,(str,os.PathLike)):
         # TO-DO: support authentication
-        return rasterio.open(source)
+        return rasterio.open(source, *args, **kwargs)
     
     # if neither rasterio dataset, filepath, or url
     else:
         raise ValueError("Source should be Rasterio DatasetReader or either a file path or a URL to a raster file.")
 
 
-def load_single_raster_with_xarray(source, *args, **kwargs):
+def load_raster_with_xarray(source, *args, **kwargs):
     """
     Utility function loads a single raster as xarray from file path or URL checking if not already a raster.
     
@@ -61,7 +61,7 @@ def load_single_raster_with_xarray(source, *args, **kwargs):
     # local file path or S3 url
     elif isinstance(source,(str,os.PathLike)):
         # TO-DO: support authentication
-        return rioxarray.open_rasterio(source)
+        return rxr.open_rasterio(source, *args, **kwargs)
     
     # List[xarray.DataArray]
     elif isinstance(source,list):

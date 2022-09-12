@@ -1,14 +1,15 @@
 import xarray
 import rasterio
 import numpy as np
-from gval.utils.loading_datasets import load_single_raster_with_xarray
-from operator import eq, ne, gt, lt, le, ge
+from gval.utils.loading_datasets import load_raster_with_xarray
+from tqdm.dask import TqdmCallback
 
 def Raster_comparison( candidate_map, benchmark_map,
-                                  comparison_type='two-class',
-                                  multi_class_comparison='one-v-all', # 'one-v-one'
-                                  metrics='two-class',
-                                 ):
+                       comparison_type='two-class',
+                       metrics='two-class',
+                       verbose=False,
+                       compute=False
+                     ):
     """
     Computes agreement raster between categorical candidate and benchmark maps.
     
@@ -42,7 +43,19 @@ def Raster_comparison( candidate_map, benchmark_map,
     --------
     """
 
-    load_ 
+    # temporary variables declaring args and kwargs to pass to rioxarray.open_rasterio
+    loading_args = []
+    loading_kwargs = {'chunks':[1,1,'auto'],'lock'}
+    
+    # load maps to xarray
+    candidate_map_xr = load_raster_with_xarray(candidate_map, *loading_args, **loading_kwargs)
+    benchmark_map_xr = load_raster_with_xarray(benchmark_map, *loading_args, **loading_kwargs)
+
+    comparison = two_class_comparison_with_negatives(candidate_map_xr,benchmark_map_xr)
+    
+    if compute:
+        with TqdmCallback(desc=,quiet=(not verbose):
+            comparison.compute()
 
 
 
