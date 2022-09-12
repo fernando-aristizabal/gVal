@@ -4,49 +4,55 @@ Secondary metrics for two-class (binary) agreement evaluation. Uses the binary, 
 
 import numpy as np
 
-def CSI(TP, FP, FN, TN=None):
-    """
-    Computes Critical Success Index (CSI)
-
-    Parameters
-    ----------
-
-    Returns
-    -------
-
-    Raises
-    ------
-
-    Notes
-    -----
+class TwoClassMetrics():
     
-    References
-    ----------
+    def __init__(self):
+        pass
 
-    Examples
-    --------
-    """
+    @staticmethod
+    def CSI(TP, FP, FN, TN=None):
+        """
+        Computes Critical Success Index (CSI)
 
-    metric_value = TP / (TP + FP + FN)
+        Parameters
+        ----------
 
-    return(metric_value)
+        Returns
+        -------
 
+        Raises
+        ------
 
-def POD(TP, FP, FN, TN=None):
-    """
-    Computes Probability of Detection (POD)
-    """
+        Notes
+        -----
+        
+        References
+        ----------
 
-    metric_value = TP / (TP + FP)
+        Examples
+        --------
+        """
 
-    return(metric_value)
+        metric_value = TP / (TP + FP + FN)
 
+        return(metric_value)
 
-def FAR(TP, FP, FN, TN=None):
-    """
-    Computes False Alarm Rate (FAR)
-    """
+    @staticmethod
+    def POD(TP, FP, FN, TN=None):
+        """
+        Computes Probability of Detection (POD)
+        """
 
-    metric_value = FN / (TP + FP)
+        metric_value = TP / (TP + FP)
 
-    return(metric_value)
+        return(metric_value)
+
+    @staticmethod
+    def FAR(TP, FP, FN, TN=None):
+        """
+        Computes False Alarm Rate (FAR)
+        """
+
+        metric_value = FN / (TP + FP)
+
+        return(metric_value)
