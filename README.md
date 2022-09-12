@@ -24,35 +24,34 @@ gVal (pronounced "g-val") is a high-level Python engine to evaluate geospatial d
         - Especialy for metadata (STAC, geoparquet, geojson, etc)
 - Comparison Prep
     - The following prep operations should be done during the comparison to avoid excessive I/O operations.
-        - Exceptions include:
-            - Checking for spatial extents
-            - Data format check and conversion
-    - Check for alignment between candidate and benchmark.
-        - spatial
-            - CRS
-            - extents (reject if no alignment is found)
-            - resolution
-        - temporal
-        - metadata
-    - Homogenize
-        - spatial
-            - Reproject
-            - Match extents
-            - Resample resolutions
-        - temporal
-            - select temporal mis-alignment criteria
-        - metadata
-            - select rules for disagreement
-    - Statistical Data Type Conversions
-        - Pass operator functions both registered and user defined
-        - Conversion Types
-            - Categorical to binary
-            - Continuous to categorical
-            - Continuous to binary
-    - Data Format Check and Conversion
-        - Check for vector and raster data formats
-        - Convert to one consistent data format for comparison
-    - Metadata prep
+        - Check for alignment between candidate and benchmark.
+            - spatial
+                - CRS
+                - extents (reject if no alignment is found)
+                - resolution
+            - temporal
+            - metadata
+        - Data Format Check
+            - Check for vector and raster data formats
+    - This should be done after loading datasets
+        - Homogenize
+            - spatial
+                - Reproject
+                - Match extents
+                - Resample resolutions
+            - temporal
+                - select temporal mis-alignment criteria (done before loading)
+            - metadata 
+                - select rules for disagreement (done before loading)
+        - Statistical Data Type Conversions
+            - Pass operator functions both registered and user defined
+            - Conversion Types
+                - Categorical to binary
+                - Continuous to categorical
+                - Continuous to binary
+        - Data Format Conversion
+            - Convert to one consistent data format for comparison
+        - Metadata prep
 - Comparison
     - Comparisons should avoid opening up the entire files to avoid excessive memory use.
     - Comparisons should minimize I/O operations.

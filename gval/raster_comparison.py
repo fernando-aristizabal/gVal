@@ -51,6 +51,9 @@ def Raster_comparison( candidate_map, benchmark_map,
     candidate_map_xr = load_raster_with_xarray(candidate_map, *loading_args, **loading_kwargs)
     benchmark_map_xr = load_raster_with_xarray(benchmark_map, *loading_args, **loading_kwargs)
 
+    # check for alignment
+    # preprocessing 
+
     comparison = two_class_comparison_with_negatives(candidate_map_xr,benchmark_map_xr)
     
     if compute:
