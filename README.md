@@ -1,5 +1,5 @@
-# gVal: Geospatial Evaluation Engine
-gVal (pronounced "g-val") is a high-level Python engine to evaluate geospatial datasets by comparing candidate and benchmark maps to produce agreement maps and metrics.
+# gVal: Geospatial Evaluation Framework
+gVal (pronounced "g-val") is a high-level Python framework to evaluate the geospatial skill of candidate maps to benchmarks producing agreement maps and metrics.
 
 ## Architecture
 - Inputs maps
@@ -80,7 +80,7 @@ gVal (pronounced "g-val") is a high-level Python engine to evaluate geospatial d
 ## Road Map
 
 ### Checkpoint 1: Minimum Viable Product
-- [ ] Easy to use, well documented, high-level functionality.
+- [ ] Easy to use, well documented, component level functionality for use as an API
 - [ ] Accepts GDAL compatible single-band raster formats.
 - [ ] Accepts two-class (binary) categorical variables with set encodings.
 - [ ] Handles a registry of encodings based on keyword descriptors (e.g. inundation map, landcover data, etc).
