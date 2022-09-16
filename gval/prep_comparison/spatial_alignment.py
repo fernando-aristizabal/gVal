@@ -1,11 +1,9 @@
 
-import numpy as np
-import rasterio as rs
 import rioxarray as rxr
-import xarray as xr
+import shapely
 
 def Spatial_alignment( candidate_map, benchmark_map,
-                       match_map, dst_crs=None, resolution=None, 
+                       match_map='benchmark', dst_crs=None, resolution=None, 
                        shape=None, transform=None, resampling=Resampling.nearest,
                        nodata=None, **kwargs):
     """
@@ -17,9 +15,7 @@ def Spatial_alignment( candidate_map, benchmark_map,
         a 'crs' attribute to be set containing a valid CRS.
         If using a WKT (e.g. from spatiareference.org), make sure it is an OGC WKT.
 
-    .. versionadded:: 0.0.27 shape
-    .. versionadded:: 0.0.28 transform
-    .. versionadded:: 0.5.0 nodata, kwargs
+    .. versionadded:: X.X.X.X feature
 
     Parameters
     ----------
@@ -52,9 +48,59 @@ def Spatial_alignment( candidate_map, benchmark_map,
     :class:`xarray.Dataset`:
         The reprojected Dataset.
     """
+    # check if rasters intersect at all
+    rasters_intersect(candidate_map, benchmark_map, match_map, desired_crs)
 
-    # check extents
+    # reproject maps to align
+    align_rasters(candidate_map, benchmark_map, match_map, desired_crs)
 
 
-def check_raster_spatial_extents(candidate_map, benchmark_map):
-    pass
+
+def align_rasters(candidate_map, benchmark_map, match_map=None, desired_crs=None):
+
+    # reproject rasters
+    if match_map == 'benchmark':
+        candidate_map = candidate_map.rio.reproject_match(benchmark_map)
+    elif match_map == 'candidate':
+        benchmark_map = benchmark_map.rio.reproject_match(candidate_map)
+    elif match_map == None:
+        pass
+    else:
+        raise ValueError("match_map argument only accepts None type, 'candidate', or 'benchmark'.")
+    
+    # override values if any are passed
+    candidate_map = candidate_map.rio.reproject( dst_crs, resolution, 
+                                                 shape, transform, resampling,
+                                                 nodata, **kwargs )
+    benchmark_map = benchmark_map.rio.reproject( dst_crs, resolution, 
+                                                 shape, transform, resampling,
+                                                 nodata, **kwargs )
+
+    return(candidate_map, benchmark_map)
+
+
+def rasters_intersect(candidate_map, benchmark_map, match_map=None, dst_crs=None):
+    
+    # transform bounds of candidate map to that of CRS of benchmark
+    if (match_map == 'benchmark') & (dst_crs != None):
+        candidate_bounds = candidate_map.rio.transform_bounds(benchmark_map.rio.crs)
+        benchmark_bounds = benchmark_map.rio.bounds()
+    elif (match_map == 'candidate') & (dst_crs != None):
+        benchmark_bounds = benchmark_map.rio.transform_bounds(candidate_map.rio.crs)
+        candidate_bounds = candidate_map.rio.bounds()
+    elif (match_map == None) & (dst_crs != None):
+        candidate_bounds = candidate_map.rio.transform_bounds(dst_crs)
+        benchmark_bounds = benchmark_map.rio.transform_bounds(dst_crs)
+    else:
+        raise ValueError("match_map argument only accepts None type, 'candidate', or 'benchmark'.")
+
+    # convert bounds to shapely boxes
+    candidate_bounds_geom = box(*candidate_bounds)
+    benchmark_bounds_geom = box(*benchmark_bounds)
+
+    # check for intersection
+    intersect_bool = candidate_bounds_geom.intersects(benchmark_bounds_geom)
+
+    return(intersect_bool)
+
+
