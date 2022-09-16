@@ -1,7 +1,9 @@
 
 import rioxarray as rxr
-import shapely
+from shapely.geometry import box
+import dask
 
+@dask.delayed
 def Spatial_alignment( candidate_map, benchmark_map,
                        match_map='benchmark', dst_crs=None, resolution=None, 
                        shape=None, transform=None, resampling=Resampling.nearest,
@@ -55,7 +57,7 @@ def Spatial_alignment( candidate_map, benchmark_map,
     align_rasters(candidate_map, benchmark_map, match_map, desired_crs)
 
 
-
+@dask.delayed
 def align_rasters(candidate_map, benchmark_map, match_map=None, desired_crs=None):
 
     # reproject rasters
@@ -78,7 +80,7 @@ def align_rasters(candidate_map, benchmark_map, match_map=None, desired_crs=None
 
     return(candidate_map, benchmark_map)
 
-
+@dask.delayed
 def rasters_intersect(candidate_map, benchmark_map, match_map=None, dst_crs=None):
     
     # transform bounds of candidate map to that of CRS of benchmark
