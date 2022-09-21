@@ -77,6 +77,16 @@ gVal (pronounced "g-val") is a high-level Python framework to evaluate the geosp
         - metric values
         - dataframes
 
+## Technology Stacks
+Python
+- Computation
+    - Numpy, Pandas, xarray, Dask
+- Geospatial
+    - Vector
+        - OGR, fiona, shapely, geopandas
+    - Raster
+        - GDAL, rasterio, xarray, rioxarray
+
 ## Road Map
 
 ### Checkpoint 1: Minimum Viable Product
