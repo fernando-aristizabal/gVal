@@ -2,9 +2,21 @@
 import xarray
 import numpy as np
 from tqdm.dask import TqdmCallback
+import dask
 
 import gval.two_class_confusion_table import two_class_contingency_table  
 
+@dask.delayed()
+def categorical_comparison(candidate_map, benchmark_map):
+    
+    # use dask
+    comparison_dd = dask.dataframe.concat( candidate_map.to_dask_dataframe(),
+                                           benchmark_map.to_dask_dataframe() )
+
+    comparison_dd.categorize()
+    comparison_dd.pivot_table()
+
+    pass
 
 def two_class_comparison( candidate_map, benchmark_map,
                           candidate_positive_value, benchmark_positive_value,
@@ -42,6 +54,7 @@ def two_class_comparison( candidate_map, benchmark_map,
 
 
     return Agreement_map(agreement_map), two_class_contingency_table(tp.sum(),fp.sum(),tn.sum(),fn.sum())
+
 
 
 def multi_class_comparison():
