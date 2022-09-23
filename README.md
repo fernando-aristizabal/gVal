@@ -81,11 +81,14 @@ gVal (pronounced "g-val") is a high-level Python framework to evaluate the geosp
 Python
 - Serialization, Numerical Computation, and Scheduling
     - PyData Stack: Numpy, Pandas, xarray, Dask
-- Geospatial Stack
+- Geospatial Components
     - Vector
         - OGR, fiona, shapely, geopandas
+        - zarr for collections of vector files
     - Raster
         - GDAL, rasterio, xarray, rioxarray
+        - STAC for collections of vector files
+    
 
 ## Road Map
 
