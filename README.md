@@ -113,6 +113,7 @@ Python
 - [ ] Include test functionality
     - [ ] unit tests
     - [ ] integration tests
+    - [ ] benchmarking capabilities (pytest-benchmarking?)
     - [ ] include simple test datasets
     - [ ] include results for tests on readme/website
 - [ ] Dependency management & packaging
