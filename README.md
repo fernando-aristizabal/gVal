@@ -99,8 +99,9 @@ Python
 - [ ] Handles a registry of encodings based on keyword descriptors (e.g. inundation map, landcover data, etc).
 - [ ] Accepts local and remote files on S3s.
 - [ ] Supports a wide array of two-class categorical metrics.
-- [ ] Reads files in chunks to avoid lower memory requirements.
-- [ ] Conducts operations in parallel.
+- [ ] Consider parallel (dask, xarray) and non-parallel (numpy, pandas) engines
+    - [ ] Reads files in chunks to avoid lower memory requirements.
+    - [ ] Conducts operations in parallel.
 - [ ] Uses a consistent set of vocabulary in variables, comments, and documentation
     - [ ] metrics, agreement, difference, evaluation, benchmark map, Candidate map? Need better name?
 - [ ] Clear, concise, and foundational Object Oriented Architecture
