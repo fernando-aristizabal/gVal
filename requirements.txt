@@ -1,9 +1,0 @@
-xarray
-rasterio
-numpy
-pandas
-geopandas
-shapely
-fiona
-tqdm
-dask

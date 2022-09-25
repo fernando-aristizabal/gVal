@@ -117,7 +117,11 @@ Python
     - [ ] include simple test datasets
     - [ ] include results for tests on readme/website
 - [ ] Dependency management & packaging
-    - [ ] Docker, PyPi, pip, etc
+    - [ ] Environment packaging
+        - [ ] docker
+        - [ ] pypi / pip
+        - [ ] [scientific environments](https://packaging.python.org/en/latest/guides/installing-scientific-packages/#linux-distribution-packages) such as conda
+        - [ ] standalone commandline tool with [pipx](https://packaging.python.org/en/latest/guides/installing-stand-alone-command-line-tools/)
 - [ ] Use a logger
 - [ ] Have a clear user interface
     - [ ] public functions as API

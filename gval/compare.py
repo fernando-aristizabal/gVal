@@ -3,10 +3,10 @@ import dask
 import dask.dataframe as dd
 
 @dask.delayed()
-def compare_rasters(
+def compare_categorical_rasters(
     candidate_map: dask.array.Array,
     benchmark_map: dask.array.Array
-    ) -> Tuple[dask.dataframe.DataFrame,dask.array.Array]:
+    ) -> tuple[dask.dataframe.DataFrame,dask.array.Array]:
     
     """
     Creates contingency and agreement tables as dds from candidate and benchmark sliceable arrays.
@@ -33,11 +33,11 @@ def compare_rasters(
     agreement_table = contingency_table.reset_values(name='count').loc[:,'count'].to_dask_array()
 
     # convert agreement table back to dask array
-    agreement_array = 
+    agreement_array = None
 
     return(agreement_table, contingency_table)
 
 
 @dask.delayed()
-def compare_vectors():
+def compare_categorical_vectors():
     pass

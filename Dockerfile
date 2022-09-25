@@ -1,66 +1,70 @@
-#From python:3.11-rc-bullseye as 
+FROM python:3.11-rc-bullseye AS builder
 
-#RUN useradd -ms /bin/bash user
-#USER user
+# TRICK TO
+#FROM python:3.11-rc-alpine3.16 AS builder
+#ARG PYTHON_VERSION=3.7.0-alpine3.8
+#FROM python:${PYTHON_VERSION} as builder
 
-#WORKDIR /home/user
+ARG REQS=base
+ARG VENV=/usr/local/gval_env
+ARG PROJ=/gval
 
-#RUN python3 -m pip install --upgrade pip 
-#RUN python3 -m pip install --upgrade pipenv
+COPY requirements/$REQS.txt /tmp
 
-#COPY Pipfile .
-#RUN pipenv install -r requirements.txt && rm Pipfile
+RUN apt update --fix-missing && \
+    DEBIAN_FRONTEND=noninteractive \
+        apt install -qy \
+            gdal-bin=3.2.2+dfsg-2+deb11u1 \
+            libgdal-dev=3.2.2+dfsg-2+deb11u1 \
+            python3-gdal=3.2.2+dfsg-2+deb11u1 && \
+    apt auto-remove -y && \
+    python3 -m venv $VENV && \
+    rm -rf /var/cache/apt/* /var/lib/apt/lists/* && \
+    $VENV/bin/pip install -r /tmp/$REQS.txt
+
+RUN pip install -r /tmp/$REQS.txt && \
+    rm -rf /tmp/*
+
 ###############################################################################################
+# development stage
 ###############################################################################################
 FROM python:3.11-rc-bullseye AS development
 
+## SETTING ENV VARIABLES ##
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
+# ensures stdout stderr are sent straight to terminal
+ENV PYTHONUNBUFFERED=TRUE 
+
+## Virtual and project directories ##
+ARG VENV=$PROJ_env
+ARG PROJ=$PROJ
+
+# Label docker image
+LABEL version="" \
+      maintaner="Fernando Aristizabal" \
+      release-date=""
+
+# RETRIEVE BUILT DEPENDENCIES
+COPY --from=builder $VENV $VENV
+
+# set path to virtual env so that future python commands use is it
+ENV PATH="$VENV:$PATH"
+
+## ADDING USER GROUP ##
+ARG UID=1001
+ARG UNAME=user
+RUN useradd -Ums /bin/bash -u $UID $UNAME
+USER $UNAME
+WORKDIR /home/$UNAME
+
 ###############################################################################################
+# runtime stage
 ###############################################################################################
-FROM python:3.11-rc-bullseye AS builder
+#FROM development AS rutime
 
-RUN pip install --user pipenv
+#COPY . $PROJ
+#WORKDIR $PROJ
+#RUN $VENV/bin/pip install $PROJ
 
-# Tell pipenv to create venv in the current directory
-ENV PIPENV_VENV_IN_PROJECT=1
-
-# Pipfile contains requests
-#ADD Pipfile.lock Pipfile /usr/src/
-ADD Pipfile /usr/src/
-
-WORKDIR /usr/src
-
-# NOTE: If you install binary packages required for a python module, you need
-# to install them again in the runtime. For example, if you need to install pycurl
-# you need to have pycurl build dependencies libcurl4-gnutls-dev and libcurl3-gnutls
-# In the runtime container you need only libcurl3-gnutls
-
-# RUN apt install -y libcurl3-gnutls libcurl4-gnutls-dev
-
-RUN /root/.local/bin/pipenv sync
-
-RUN /usr/src/.venv/bin/python -c "import requests; print(requests.__version__)"
-
-###############################################################################################
-###############################################################################################
-FROM python:3.11-rc-bullseye AS runtime
-
-RUN mkdir -v /usr/src/.venv
-
-COPY --from=builder /usr/src/.venv/ /usr/src/.venv/
-
-RUN /usr/src/.venv/bin/python -c "import requests; print(requests.__version__)"
-
-# HERE GOES ANY CODE YOU NEED TO ADD TO CREATE YOUR APPLICATION'S IMAGE
-# For example
-# RUN apt install -y libcurl3-gnutls
-# RUN adduser --uid 123123 coolio
-# ADD run.py /usr/src/
-#WORKDIR /usr/src/
-#USER coolio
-
-RUN useradd -ms /bin/bash user
-USER user
-
-WORKDIR /home/user
-
-#CMD ["./.venv/bin/python", "-m", "run.py"]
+#CMD ["./.venv/bin/python", "-m", "$PROJ/main.py"]
