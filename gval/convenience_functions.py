@@ -1,7 +1,7 @@
 import xarray
 import rasterio
 import numpy as np
-from gval.utils.loading_datasets import load_raster_with_xarray
+from gval.utils.loading_datasets import load_raster_as_xarray
 from tqdm.dask import TqdmCallback
 import gval.two_class_confusion_table import two_class_contingency_table  
 
@@ -49,8 +49,8 @@ def Raster_comparison( candidate_map, benchmark_map,
     loading_kwargs = {'chunks':[1,1,'auto'],'lock'}
     
     # load maps to xarray
-    candidate_map_xr = load_raster_with_xarray(candidate_map, *loading_args, **loading_kwargs)
-    benchmark_map_xr = load_raster_with_xarray(benchmark_map, *loading_args, **loading_kwargs)
+    candidate_map_xr = load_raster_as_xarray(candidate_map, *loading_args, **loading_kwargs)
+    benchmark_map_xr = load_raster_as_xarray(benchmark_map, *loading_args, **loading_kwargs)
 
     # pre-comparison prep 
 

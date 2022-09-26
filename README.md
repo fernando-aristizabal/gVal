@@ -106,8 +106,10 @@ Python
     - [ ] metrics, agreement, difference, evaluation, benchmark map, Candidate map? Need better name?
 - [ ] Clear, concise, and foundational Object Oriented Architecture
      - [ ] Organize functions, classes, modules, parameters, etc in a logical directory structure
-- [ ] Use consistent Docstring styling
-- [ ] Use PEP formats and standards
+- Use consistent styling
+    - [ ] Use consistent Docstring styling
+    - [ ] Comply with [PEP8](https://pep8.org/#introduction) standards
+    - [ ] Use linter and style checkers
 - [ ] Make a documentation website
     - [ ] installation, objects, usage examples
 - [ ] Include test functionality

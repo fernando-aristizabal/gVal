@@ -3,9 +3,9 @@ import dask
 import dask.dataframe as dd
 
 @dask.delayed()
-def compare_categorical_rasters(
-    candidate_map: rioxarray.DataArray,
-    benchmark_map: rioxarray.DataArray
+def crosstab_rasters(
+    candidate_map: xarray.DataArray,
+    benchmark_map: xarray.DataArray
     ) -> tuple[dask.dataframe.DataFrame,dask.array.Array]:
     
     """

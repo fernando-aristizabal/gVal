@@ -31,19 +31,15 @@ tomli==2.0.1
 toolz==0.12.0
 xarray==2022.6.0
 ###################################
-# testing
-pytest
-pytest-benchmark
-###################################
 # Potential future packages
 #numba
 #argcomplete
 #geopandas
 #tqdm
 #pandas
-#shapely
 #scipy
 #statsmodels
 #fiona
 #rasterio
 #geocube
+#boto3

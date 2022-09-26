@@ -1,42 +1,35 @@
-import rasterio
+"""
+Functions to load datasets
+"""
+
+# __all__ = ['a', 'b', 'c']
+__version__ = '0.0.0.0'
+__author__ = 'Fernando Aristizabal'
+
+import os
+
 import rioxarray as rxr
 import xarray as xr
-import boto3
+import rasterio
+
+# To-Do: allow for s3 reads
+#import boto3
 
 
-def load_rasterio_file(source, *args, **kwargs):
+def load_raster_as_xarray(
+    source: Union[str, os.PathLike, rasterio.io.DatasetReader,
+             Rasterio.vrt.WarpedVRT, xarray.DataArray],
+    *args,
+    **kwargs
+    ) -> xarray.DataArray:
     """
-    Utility function loads a single raster from file path or URL checking if not already a raster.
-    
+    Loads a single raster as xarray DataArray from file path or URL.
+
+    Currently working on extending support for S3.
+
     Parameters
     ----------
-
-    Returns
-    -------
-
-    """
-    
-    # rasterio dataset
-    if isinstance(source,rasterio.io.DatasetReader):
-        return source
-    
-    # local file path or S3 url
-    if isinstance(source,(str,os.PathLike)):
-        # TO-DO: support authentication
-        return rasterio.open(source, *args, **kwargs)
-    
-    # if neither rasterio dataset, filepath, or url
-    else:
-        raise ValueError("Source should be Rasterio DatasetReader or either a file path or a URL to a raster file.")
-
-
-def load_raster_with_xarray(source, *args, **kwargs):
-    """
-    Utility function loads a single raster as xarray from file path or URL checking if not already a raster.
-    
-    Parameters
-    ----------
-    source : str, os.PathLike, rasterio.io.DatasetReader, Rasterio.vrt.WarpedVRT, xarray.Dataset, xarray.DataArray, or list of xarray.DataArray
+    source : str, os.PathLike, rasterio.io.DatasetReader, Rasterio.vrt.WarpedVRT, xarray.DataArray
         Path to file or opened Rasterio Dataset.
     *args : args, optional
         Optional positional arguments to pass to rioxarray.open_rasterio.
@@ -45,17 +38,14 @@ def load_raster_with_xarray(source, *args, **kwargs):
 
     Returns
     -------
-    xarray.Dataset
-        xarray dataset.
     xarray.DataArray
         xarray dataarray.
-    List[xarray.Dataset]
-        list of xarray datasets.
-
     """
     
-    # rasterio dataset
-    if isinstance(source,(xr.dataset,xr.DataArray)):
+    #if isinstance(source,(xr.Dataset,xr.DataArray)):
+    
+    # existing xr DataArray
+    if isinstance(source,xr.DataArray):
         return source
     
     # local file path or S3 url
@@ -63,10 +53,11 @@ def load_raster_with_xarray(source, *args, **kwargs):
         # TO-DO: support authentication
         return rxr.open_rasterio(source, *args, **kwargs)
     
+    # removed DataSet support for now
     # List[xarray.DataArray]
-    elif isinstance(source,list):
-        if all( [isinstance(e,xr.Dataset) for e in source )
-        return source
+    #elif isinstance(source,list):
+    #    if all( [isinstance(e,xr.Dataset) for e in source] ):
+    #        return source
     
     # if neither rasterio dataset, filepath, or url
     else:
