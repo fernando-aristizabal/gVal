@@ -1,2 +1,5 @@
 pytest
 pytest-benchmark
+pytest-pep8
+pytest-flakes
+allure-pytest
