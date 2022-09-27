@@ -25,20 +25,38 @@ pytestmark = pytest.mark.parametrize( "candidate_map,benchmark_map,expect",
                                          True )])
 
 @pytest.fixture(scope='module', params=['candidate_map_0.tif'])
-def candidate_map(request):
+def candidate_map_fp(request):
     """ returns candidate maps """
     filepath = os.path.join(test_data_dir,request.param)
-    return load_raster_as_xarray(filepath)
+    return filepath
 
 @pytest.fixture(scope='module', params=['benhcmark_map_0.tif'])
-def benchmark_map(request):
+def benchmark_map_fp(request):
     """ returns benchmark maps """
     filepath = os.path.join(test_data_dir,request.param)
+    return filepath
+
+@pytest.fixture(scope='module')
+def candidate_map(filepath):
+    """ returns candidate maps """
+    return load_raster_as_xarray(filepath)
+
+@pytest.fixture(scope='module')
+def benchmark_map(request):
+    """ returns benchmark maps """
     return load_raster_as_xarray(filepath)
 
 @pytest.mark.parametrize("expect",[True])
-def load_raster_as_xarray(candidate_map, benchmark_map, expect):
-    
+def test_load_candidate_as_xarray(candidate_map_fp, expect):
+    """ tests loading candidate raster as xarray DataArray """
+    candidate_map = load_raster_as_xarray(candidate_map_fp)
+    assert isinstance(candidate_map,xarray.DataArray), "candidate_map is not an xarray.DataArray"
+
+@pytest.mark.parametrize("expect",[True])
+def test_load_benchmark_as_xarray(benchmark_map_fp, expect):
+    """ tests loading benchmark raster as xarray DataArray """
+    benchmark_map = load_raster_as_xarray(benchmark_map_fp)
+    assert isinstance(benchmark_map,xarray.DataArray), "benchmark_map is not an xarray.DataArray"
 
 @pytest.mark.parametrize("expect",[True])
 def test_matching_crs(candidate_map, benchmark_map, expect):

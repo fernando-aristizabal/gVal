@@ -6,10 +6,13 @@ Functions to load datasets
 __version__ = '0.0.0.0'
 __author__ = 'Fernando Aristizabal'
 
+from typing import (
+    Union
+)
 import os
 
-import rioxarray as rxr
-import xarray as xr
+import rioxarray as rioxarray
+import xarray
 import rasterio
 
 # To-Do: allow for s3 reads
@@ -18,7 +21,7 @@ import rasterio
 
 def load_raster_as_xarray(
     source: Union[str, os.PathLike, rasterio.io.DatasetReader,
-             Rasterio.vrt.WarpedVRT, xarray.DataArray],
+             rasterio.vrt.WarpedVRT, xarray.DataArray],
     *args,
     **kwargs
     ) -> xarray.DataArray:
@@ -42,21 +45,21 @@ def load_raster_as_xarray(
         xarray dataarray.
     """
     
-    #if isinstance(source,(xr.Dataset,xr.DataArray)):
+    #if isinstance(source,(xarray.Dataset,xarray.DataArray)):
     
-    # existing xr DataArray
-    if isinstance(source,xr.DataArray):
+    # existing xarray DataArray
+    if isinstance(source,xarray.DataArray):
         return source
     
     # local file path or S3 url
     elif isinstance(source,(str,os.PathLike)):
         # TO-DO: support authentication
-        return rxr.open_rasterio(source, *args, **kwargs)
+        return rioxarray.open_rasterio(source, *args, **kwargs)
     
     # removed DataSet support for now
     # List[xarray.DataArray]
     #elif isinstance(source,list):
-    #    if all( [isinstance(e,xr.Dataset) for e in source] ):
+    #    if all( [isinstance(e,xarray.Dataset) for e in source] ):
     #        return source
     
     # if neither rasterio dataset, filepath, or url
