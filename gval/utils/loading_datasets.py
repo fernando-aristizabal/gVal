@@ -2,8 +2,7 @@
 Functions to load datasets
 """
 
-# __all__ = ['a', 'b', 'c']
-__version__ = '0.0.0.0'
+#__all__ = ['*']
 __author__ = 'Fernando Aristizabal'
 
 from typing import (

@@ -118,6 +118,7 @@ Python
     - [ ] benchmarking capabilities (pytest-benchmarking?)
     - [ ] include simple test datasets
     - [ ] include results for tests on readme/website
+    - [ ] tox for test automation
 - [ ] Dependency management & packaging
     - [ ] Environment packaging
         - [ ] docker

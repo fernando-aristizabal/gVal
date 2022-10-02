@@ -1,6 +1,7 @@
 
 import dask
 import dask.dataframe as dd
+import xarray
 
 @dask.delayed()
 def crosstab_rasters(
@@ -17,7 +18,7 @@ def crosstab_rasters(
     # convert to dask dataframes with only the data via a dataset
     # only use indices from benchmark
     candidate_map_dd = candidate_map.to_dataset(name='candidate').to_dask_dataframe().loc[:,'candidate']
-    benchmark_map_dd = benchmark_map.to_dataset(name='benchmark').to_dask_dataframe().loc[:,['benchmark','x','y']]
+    benchmark_map_dd = benchmark_map.to_dataset(name='benchmark').to_dask_dataframe().loc[:,:]
 
     # concat dds
     comparison_dd = dd.concat([candidate_map_dd, benchmark_map_dd],axis=1)
@@ -41,6 +42,5 @@ def crosstab_rasters(
     return(agreement_table, contingency_table)
 
 
-@dask.delayed()
-def compare_categorical_vectors():
+def compare_continuous_rasters():
     pass
