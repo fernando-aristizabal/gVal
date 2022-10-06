@@ -4,21 +4,22 @@ gVal (pronounced "g-val") is a high-level Python framework to evaluate the geosp
 ## Architecture
 - Inputs maps
     - Candidates and Benchmarks
-        - Including collections and catalogs
+        - Including metadata
     - Variable name
         - ie inundation, land cover, land use, backscatter, etc
     - Statistical Data Type
-        - Categorical (multi-class)
-        - Binary (two- class)
+        - Categorical (two- and multi- class)
             - encodings for positive and negative condition values
-        - Continous
+        - Continuous
     - Raster attribute table: associates names to data values
     - Data format
         - GDAL compatible vector 
         - GDAL compatible raster
-    - Additional metadata
+    - Cataloging standards with metadata
         - modeling parameters
         - time
+        - [GeoNetwork](https://geonetwork-opensource.org/)
+        - STAC
     - Decide on storage types and in-memory data structures
         - Deserialization methods
         - Especialy for metadata (STAC, geoparquet, geojson, etc)
@@ -142,6 +143,8 @@ Python
 - Evaluations should be scaled to accept a series of candidates and benchmarks.
     - These maps should be accepted as lists of objects, file paths, or catalogs.
     - Catalogs should be a data structure designed for this purpose to include experiment relevant parameters associated with each map.
+        - [GeoNetwork](https://geonetwork-opensource.org/)
+        - STAC
 - Candidate and benchmark maps need to be cataloged with associated metadata values
     - space, time, parameters, etc
 - Agreement maps and metrics should be able to inherit these metadata 
