@@ -33,6 +33,7 @@ xarray==2022.6.0
 ###################################
 # Potential future packages
 #numba
+#xarray-spatial
 #argcomplete
 #geopandas
 #tqdm
