@@ -83,7 +83,7 @@ NOTE: THIS PACKAGE IS UNDER ACTIVE DEVELOPMENT AND NOT CURRENTLY FUNCTIONING. BR
 ## Technology Stacks
 Python
 - Serialization, Numerical Computation, and Scheduling
-    - PyData Stack: Numpy, Pandas, xarray, Dask
+    - PyData Stack: Numpy, Pandas, xarray, Dask, [xarray-spatial](https://xarray-spatial.org)
 - Geospatial Components
     - Vector
         - OGR, fiona, shapely, geopandas
