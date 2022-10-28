@@ -44,3 +44,4 @@ xarray==2022.6.0
 #rasterio
 #geocube
 #boto3
+#pint-xarray (conversion of units)
