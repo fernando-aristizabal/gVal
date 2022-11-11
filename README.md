@@ -53,7 +53,9 @@ NOTE: THIS PACKAGE IS UNDER ACTIVE DEVELOPMENT AND NOT CURRENTLY FUNCTIONING. BR
                 - Continuous to categorical
                 - Continuous to binary
         - Data Format Conversion
-            - Convert to one consistent data format for comparison
+            - Convert to one consistent data format for comparison1
+            - Use (colortables)[https://rasterio.readthedocs.io/en/latest/topics/color.html]?
+            - Include (tags)[https://rasterio.readthedocs.io/en/latest/topics/tags.html]?
         - Metadata prep
 - Comparison
     - Comparisons should avoid opening up the entire files to avoid excessive memory use.
