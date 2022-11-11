@@ -1,29 +1,44 @@
 FROM python:3.11-rc-bullseye AS builder
 
-# TRICK TO
-#FROM python:3.11-rc-alpine3.16 AS builder
+# TRICK TO USE DIFFERENT PYTHON VERSIONS
 #ARG PYTHON_VERSION=3.7.0-alpine3.8
 #FROM python:${PYTHON_VERSION} as builder
 
+# TRY ALPINE LINUX PYTHON FOR SMALLER IMAGE
+#FROM python:3.11-rc-alpine3.16 AS builder
+
+## ARGS ##
 ARG REQS=base
 ARG VENV=/usr/local/gval_env
-ARG PROJ=/gval
+ARG PROJDIR=/gval
+ARG VERSION=''
+ARG MAINTANER='Fernando Aristizabal'
+ARG RELEASE_DATE=''
 
+## SETUP ENV VARS ##
+ARG VENV=$VENV
+ARG PROJDIR=$PROJDIR
+
+## COPY IN REQUIREMENTS ##
 COPY requirements/$REQS.txt /tmp
 
+## INSTALL EXTERNAL DEPENDENCIES ##
+# remove versions if errors occur
 RUN apt update --fix-missing && \
     DEBIAN_FRONTEND=noninteractive \
         apt install -qy \
-            gdal-bin=3.2.2+dfsg-2+deb11u1 \
-            libgdal-dev=3.2.2+dfsg-2+deb11u1 \
-            python3-gdal=3.2.2+dfsg-2+deb11u1 && \
+            gdal-bin=3.2.2+dfsg-2+deb11u2 \
+            libgdal-dev=3.2.2+dfsg-2+deb11u2 \
+            python3-gdal=3.2.2+dfsg-2+deb11u2 && \
     apt auto-remove -y && \
     python3 -m venv $VENV && \
     rm -rf /var/cache/apt/* /var/lib/apt/lists/* && \
-    $VENV/bin/pip install -r /tmp/$REQS.txt
-
-RUN pip install -r /tmp/$REQS.txt && \
+    $VENV/bin/pip install -r /tmp/$REQS.txt && \
     rm -rf /tmp/*
+
+# TRY USING $VENV/bin/pip???
+#RUN $VENV/bin/pip install -r /tmp/$REQS.txt && \
+#    rm -rf /tmp/*
 
 ###############################################################################################
 # development stage
@@ -37,13 +52,13 @@ ENV LANG=C.UTF-8
 ENV PYTHONUNBUFFERED=TRUE 
 
 ## Virtual and project directories ##
-ARG VENV=$PROJ_env
-ARG PROJ=$PROJ
+#ARG VENV=$VENV
+#ARG PROJDIR=$PROJDIR
 
 # Label docker image
-LABEL version="" \
-      maintaner="Fernando Aristizabal" \
-      release-date=""
+LABEL version=$VERSION \
+      maintaner=$MAINTANER \
+      release-date=$RELEASE_DATE
 
 # RETRIEVE BUILT DEPENDENCIES
 COPY --from=builder $VENV $VENV
@@ -61,10 +76,10 @@ WORKDIR /home/$UNAME
 ###############################################################################################
 # runtime stage
 ###############################################################################################
-#FROM development AS rutime
+#FROM development AS runtime
 
-#COPY . $PROJ
-#WORKDIR $PROJ
-#RUN $VENV/bin/pip install $PROJ
+#COPY . $PROJDIR
+#WORKDIR $PROJDIR
+#RUN $VENV/bin/pip install $PROJDIR
 
-#CMD ["./.venv/bin/python", "-m", "$PROJ/main.py"]
+#CMD ["./.venv/bin/python", "-m", "$PROJDIR/main.py"]
