@@ -45,4 +45,5 @@ xarray==2022.6.0
 #geocube
 #boto3
 #pint-xarray (conversion of units)
-#typer[all] - for CLI. alternative to argparse
+#typer[all] - for CLI. alternative to argparse, Doesn't support Union types :/
+# graphviz OR ipycytoscape - for dask graph visualizations
